@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 //import 'package:youtube_api/src/model/thumbnails.dart';
 
 import 'dart:async';
+import 'dart:core';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -24,7 +25,7 @@ class Youtube extends StatefulWidget {
 
 class _YoutubeState extends State<Youtube> {
   late ImageFrameBuilder? frameBuilder;
-  String busqueda = "Utselva";
+  String busqueda = "Ocosingo";
   static String api_key = "AIzaSyB2aZnujxp6pzlBcePq8FBLBej6B4ymsqY";
   YoutubeAPI youtube = YoutubeAPI(api_key, type: "Video");
 
@@ -121,29 +122,26 @@ class _YoutubeState extends State<Youtube> {
             child: Image.network(
               'https://i.ytimg.com/vi/'+videos[index].id.toString()+'/default.jpg',
               //http.get(Uri.parse(videos[index].url.toString())),
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) {
+
+              frameBuilder: (BuildContext context, Widget child, int? frame,
+                  bool wasSynchronouslyLoaded) {
+                if (wasSynchronouslyLoaded) {
                   return child;
                 }
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                );
-              },
-
-              //  frameBuilder: (BuildContext context, Widget child, int? frame )? {
-              //  }
-            ),
+                return frame == false 
+                ? 
+                  Icon(
+                    Icons.video_library,
+                    size: 28,
+                    color: Colors.blue,
+                  )
+                  : child;
+                }),
           ),
           iconSize: 100,
         ),
         title: Text(videos[index].title),
-        subtitle: Text(videos[index].id.toString()),
+        subtitle: Text(videos[index].channelTitle.toString()),
       ),
       separatorBuilder: (context, index) => Divider(
         color: Colors.white,

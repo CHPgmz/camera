@@ -1,6 +1,7 @@
-import 'dart:io';
+
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:camara/apis/youtube.dart';
 import 'package:camara/src/pages/image_view.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -18,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   late GoogleMapController mapController;
   final LatLng _center = const LatLng(16.9083823, -92.0950663);
   void _onMapCreated(GoogleMapController controller) {
@@ -35,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Apis Funcionando'),
+          title: Text('Global'),
           centerTitle: true,
           backgroundColor: Colors.teal[400],
           bottom: TabBar(
@@ -44,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: <Widget>[
                   FaIcon(FontAwesomeIcons.map),
-                  Text('Camara'),
+                  Text('Mapa'),
                 ],
               )),
               Tab(
@@ -54,7 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text('YouTube'),
                 ],
               )),
-              Tab(icon: Icon(Icons.directions_bike)),
+              Tab(
+                child: Row(
+                children: <Widget>[
+                  FaIcon(FontAwesomeIcons.camera),
+                  Text('Camara'),
+                ],
+              )),
             ],
           ),
         ),
@@ -70,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
               ),
+
               itemCount: images.length,
               itemBuilder: (BuildContext context, int index) {
                 File imageFile = File(images[index].path);
@@ -82,13 +92,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         )));
                     });
               },
+
             ),
             
             //TakePictureScreen(cameras: cameras),
           ],
+
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: Icon(Icons.camera),
           onPressed: _optionsDialogBox,
         ),
       ),
@@ -104,19 +116,27 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListBody(
                 children: <Widget>[
                   GestureDetector(
-                    child: Text('image_picker: Cámara'),
+                    child: Text('Tomar Foto: Cámara'),
                     onTap: _openCamera,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(10.0),
                   ),
                   GestureDetector(
-                    child: Text('image_picker: Galería'),
+                    child: Text('Agregar Foto: Galería'),
                     onTap: _openGallery,
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                   ),
+
+                  // FloatingActionButton(
+                
+                    
+                  //   child: Text('Volver'),
+                  //   onPressed: (){
+                  //   Navigator.pop(context);
+                  // })
                   // GestureDetector(
                   //   child: Text('camera: cámara'),
                   //   onTap: () async {
@@ -178,7 +198,7 @@ Widget header() {
       color: Colors.teal[400],
     ),
     child: Text(
-      'Nivelación',
+      'Global',
       style: TextStyle(
         color: Colors.white,
         fontSize: 24,
