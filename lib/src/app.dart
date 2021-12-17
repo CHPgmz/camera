@@ -1,6 +1,9 @@
 
+import 'package:camara/apis/home.dart';
 import 'package:camara/src/pages/home_screen.dart';
+// import 'package:camara/src/pages/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -8,12 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Camara con Flutter",
       home: HomeScreen(),
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.red,
-        
       ),
     );
   }
