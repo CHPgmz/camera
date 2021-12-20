@@ -26,7 +26,7 @@ class Youtube extends StatefulWidget {
 class _YoutubeState extends State<Youtube> {
   late ImageFrameBuilder? frameBuilder;
   String busqueda = "Ocosingo";
-  static String api_key = "AIzaSyB2aZnujxp6pzlBcePq8FBLBej6B4ymsqY";
+  static String api_key = "";
   YoutubeAPI youtube = YoutubeAPI(api_key, type: "Video");
 
   Future<List<YouTubeVideo>> _buscaVideos() async {
